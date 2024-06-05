@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sreesofttech</title>
+</head>
+<body>
+    <h2>CLICK TO EXPLORE MORE</h2>
+    <hr>
+    <p>Your data is safe!!! I am updating Vamakam</p>
+    <hr>
+    
+    <div sec:authorize="hasRole('ADMIN')">
+        <button onclick="window.location.href='/admin'">ADMIN</button>
+        
+            <!-- <button th:href="@{/admin}"> ADMIN</button> -->
+        
+    </div>
+    
+    <div sec:authorize="hasRole('SELLER')">
+        
+            <!-- <a th:href="@{/sellers}">SELLER</a> -->
+            <button onclick="window.location.href='/sellers'">SELLER</button>
+            
+        
+    </div>
+    <hr>
+    
+    <div sec:authorize="hasRole('BUYER')">
+        
+            <!-- <a th:href="@{/buyer}">Only for Employee</a> -->
+            <button onclick="window.location.href='/buyer'">BUYER</button>
+        
+    </div>
+    <hr>
+    
+    <p class="use">
+        User: <span sec:authentication="principal.username"></span>
+        <br><br>
+        Roles: <span sec:authentication="principal.authorities"></span>
+    </p>
+    <hr>
+    
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Logout"/>
+    </form>
+    
+    <style>
+        .use {
+            font-size: larger;
+            font-style: italic;
+        }
+        .uss:hover {
+            cursor: pointer;
+        }
+    </style>
+</body>
+</html>
